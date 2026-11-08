@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#201a3c">
+  <meta name="description" content="ANAT-OOPS! A six-question anatomy rescue arcade. Think fast, learn something, save the day.">
+  <title>ANAT-OOPS! — The anatomy rescue arcade</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./game.js" defer></script>
+  <!-- If either companion file is missing, show a useful message instead of a broken-looking game. -->
+  <style>
+    .asset-warning{display:block;margin:18px auto;max-width:650px;padding:16px 20px;border:2px solid #222;background:#ffde79;color:#201a3c;font:700 16px/1.5 system-ui,sans-serif;border-radius:12px}
+    .asset-warning code{font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="asset-warning" id="assetWarning" role="alert">⚠ The game needs <code>styles.css</code> and <code>game.js</code> next to this file. If you only downloaded this HTML file, open <strong>PLAY-ANAT-OOPS.html</strong> instead — it works by itself.</div>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="ANAT-OOPS! Home">
+        <span class="brand-burst" aria-hidden="true">✳</span>
+        <span class="brand-name">ANAT<span class="brand-dash">-</span>OOPS<span class="brand-bang">!</span></span>
+      </a>
+      <span class="header-tag">THE ANATOMY <strong>RESCUE ARCADE</strong></span>
+      <span class="header-side"><span class="status-light" aria-hidden="true"></span> NO LOGIN. PURE CHAOS.</span>
+    </header>
+    <main id="mainContent">
+      <section class="screen landing-screen" id="landingScreen" aria-labelledby="landingTitle">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="mini-badge"><span aria-hidden="true">⚡</span> SIX TINY DISASTERS. ONE BIG BRAIN.</span>
+            <h1 id="landingTitle">KNOW THE<br><span class="title-highlight">ANATOMY.</span><br>BE THE HERO<span class="period">.</span></h1>
+            <p class="hero-lede">Six unfortunate characters. Six anatomy emergencies. You've got the knowledge and <em>25 seconds</em> to save each one.</p>
+            <div class="play-actions">
+              <button type="button" class="button button-primary" id="dailyButton">PLAY TODAY'S SIX <span aria-hidden="true">↗</span></button>
+              <button type="button" class="button button-secondary" id="demoButton">TRY DEMO MODE <span aria-hidden="true">↻</span></button>
+            </div>
+            <div class="timer-setting"><label for="demoSeconds">DEMO TIMER</label><select id="demoSeconds" aria-label="Seconds per question in demo mode"><option value="20">20 seconds</option><option value="25" selected>25 seconds</option><option value="30">30 seconds</option><option value="45">45 seconds</option></select></div>
+            <p class="saved-note" id="savedNote">No account. No downloads. Just a little anatomical heroism.</p>
+          </div>
+          <div class="hero-illustration" aria-hidden="true">
+            <span class="hero-doodle hero-doodle-one">OH NO!</span>
+            <span class="hero-doodle hero-doodle-two">100%<br>NERD</span>
+            <div class="hero-mascot-frame" id="heroMascotFrame">
+              <!-- Original ANAT-OOPS! mascot from the original project -->
+              <svg class="mascot-svg" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <ellipse cx="218" cy="391" rx="150" ry="18" fill="#27244c" opacity=".12"/>
+                <path d="M86 194 C66 115 137 61 237 66 C332 69 380 140 357 243 C341 319 276 356 199 340 C116 337 80 279 86 194 Z" fill="#bda0ff" stroke="#262144" stroke-width="10"/>
+                <path d="M115 140 C147 87 228 81 288 106" fill="none" stroke="#e8dcff" stroke-width="15" stroke-linecap="round" opacity=".7"/>
+                <ellipse cx="167" cy="206" rx="15" ry="21" fill="#262144"/><ellipse cx="271" cy="206" rx="15" ry="21" fill="#262144"/>
+                <circle cx="173" cy="197" r="5" fill="white"/><circle cx="277" cy="197" r="5" fill="white"/>
+                <ellipse cx="128" cy="243" rx="22" ry="13" fill="#ef7aa3" opacity=".7"/><ellipse cx="309" cy="243" rx="22" ry="13" fill="#ef7aa3" opacity=".7"/>
+                <path d="M195 255 Q219 281 247 253" fill="none" stroke="#262144" stroke-width="8" stroke-linecap="round"/>
+                <path d="M104 259 Q50 230 55 185" fill="none" stroke="#262144" stroke-width="13" stroke-linecap="round"/>
+                <circle cx="50" cy="173" r="18" fill="#c0a5ff" stroke="#262144" stroke-width="8"/>
+                <path d="M341 268 Q398 239 392 198" fill="none" stroke="#262144" stroke-width="13" stroke-linecap="round"/>
+                <circle cx="392" cy="190" r="17" fill="#c0a5ff" stroke="#262144" stroke-width="8"/>
+                <path d="M171 331 L153 369 M260 330 L285 369" stroke="#262144" stroke-width="14" stroke-linecap="round"/>
+                <path d="M139 372 L174 372 M270 373 L300 373" stroke="#262144" stroke-width="15" stroke-linecap="round"/>
+                <g class="mascot-bone" transform="rotate(-25 332 106)"><path d="M285 77 C264 57 254 88 267 97 L314 144 C322 157 347 141 337 126 C352 111 335 94 320 101 L292 74 C282 65 268 74 285 77 Z" fill="#fff" stroke="#262144" stroke-width="7" stroke-linejoin="round"/></g>
+                <path d="M65 87 L77 65 L88 87 L111 99 L88 110 L77 134 L65 110 L43 99Z" fill="#ffda62" stroke="#262144" stroke-width="5"/>
+                <path d="M366 316 L377 294 L388 316 L412 328 L388 340 L377 363 L366 340 L343 328Z" fill="#ff967a" stroke="#262144" stroke-width="5"/>
+              </svg>
+            </div>
+            <div class="orbit-label">QUICK THINKING<br>SAVES LIVES*</div>
+          </div>
+        </div>
+        <div class="landing-statline" aria-label="How the game works">
+          <span><strong>01</strong> READ THE DISASTER</span><span class="stat-divider">✳</span>
+          <span><strong>02</strong> TYPE THE ANSWER</span><span class="stat-divider">✳</span>
+          <span><strong>03</strong> SAVE OR LEARN</span><span class="stat-divider">✳</span>
+          <span><strong>04</strong> TRY AGAIN</span>
+        </div>
+      </section>
+
+      <section class="screen game-screen" id="gameScreen" aria-labelledby="questionText" hidden>
+        <div class="game-hud">
+          <div class="hud-left"><span class="hud-pill" id="modeLabel">DAILY CHALLENGE</span><strong class="hud-progress">QUESTION <span id="questionNumber">1</span> <span class="muted">/ 6</span></strong></div>
+          <div class="hud-score">TOTAL SCORE <strong id="runningScore">0</strong><span class="muted"> / 6,000</span></div>
+        </div>
+        <div class="stage-progress" id="stageProgress" aria-label="Question progress"><span class="stage-dot active"></span><span class="stage-dot"></span><span class="stage-dot"></span><span class="stage-dot"></span><span class="stage-dot"></span><span class="stage-dot"></span></div>
+        <div class="game-card">
+          <div class="scene-column" data-scene="triceps">
+            <div class="scene-header"><span class="scene-label" id="sceneLabel">GARAGE DISASTER</span><span class="scene-number" aria-hidden="true">✦ ✷ ✦</span></div>
+            <div class="scene" id="sceneSurface" role="img" aria-label="Cartoon depicting the anatomy scenario"></div>
+            <p class="scene-footnote" id="sceneFootnote">Someone has made an unfortunate decision.</p>
+            <div class="scene-feedback" id="sceneFeedback" aria-live="polite" aria-atomic="true"></div>
+          </div>
+          <div class="question-column">
+            <div class="question-top"><span class="difficulty-pill" id="difficultyLabel">LEVEL 1 · WARM UP</span><div class="timer" id="timerRing" aria-label="Time remaining"><span id="timerValue">25.0</span><small>SEC LEFT</small></div></div>
+            <div class="question-main"><span class="question-eyebrow">✳ THE RESCUE QUESTION</span><h2 id="questionText"></h2><p class="question-helper" id="questionHelper">Know it? Type it. You can try again if you're wrong.</p></div>
+            <form id="answerForm" class="answer-form" autocomplete="off">
+              <label for="answerInput">YOUR ANSWER</label>
+              <div class="answer-input-row"><input id="answerInput" name="answer" type="text" maxlength="100" placeholder="Anatomical answer…" autocapitalize="none" autocorrect="off" spellcheck="false" required><button class="submit-button" id="submitButton" type="submit">GO <span aria-hidden="true">↗</span></button></div>
+              <p class="input-feedback" id="inputFeedback" role="status" aria-live="polite">Press Enter or tap GO to submit.</p>
+            </form>
+            <div class="resolution-panel" id="resolutionPanel" role="status" aria-live="polite" aria-atomic="true" hidden>
+              <span class="resolution-status" id="resolutionStatus"></span>
+              <span class="resolution-label">THE ANSWER IS</span>
+              <strong class="resolution-answer" id="resolutionAnswer"></strong>
+              <span class="resolution-note" id="resolutionNote"></span>
+              <span class="resolution-next">NEXT CHALLENGE IN A MOMENT <span aria-hidden="true">→</span></span>
+            </div>
+            <div class="question-bottom"><span>⚡ UP TO 1,000 POINTS PER RESCUE</span><span id="attemptCount">0 WRONG GUESSES</span></div>
+          </div>
+        </div>
+        <p class="game-disclaimer">Educational prototype. All anatomy questions require independent educator review before formal educational use.</p>
+      </section>
+
+      <section class="screen results-screen" id="resultsScreen" aria-labelledby="resultsTitle" hidden>
+        <div class="results-header"><span class="mini-badge"><span aria-hidden="true">✳</span> THE DISASTERS HAVE CONCLUDED</span><h1 id="resultsTitle">THE VERDICT IS IN.</h1><p id="resultsMessage"></p></div>
+        <div class="results-summary">
+          <div class="summary-tile summary-score"><span>YOUR SCORE</span><strong id="finalScore">0</strong><small>OUT OF 6,000 POINTS</small></div>
+          <div class="summary-tile"><span>CHARACTERS SAVED</span><strong id="correctCount">0 <small>/ 6</small></strong><small>EVERY MISS IS A LESSON</small></div>
+          <div class="summary-tile"><span>PLAYED IN</span><strong class="mode-summary" id="resultsMode">DEMO</strong><small id="resultsDate"></small></div>
+        </div>
+        <div class="breakdown-heading"><div><span class="section-kicker">THE LEARNING BIT</span><h2>ANATOMY AUTOPSY <span aria-hidden="true">↘</span></h2></div><p>See what you typed, what was correct, and why.</p></div>
+        <div class="breakdown-list" id="breakdownList"></div>
+        <div class="results-actions"><button class="button button-primary" type="button" id="replayButton">PLAY ANOTHER ROUND <span aria-hidden="true">↻</span></button><button class="button button-secondary" type="button" id="homeButton">BACK TO START <span aria-hidden="true">↗</span></button></div>
+        <p class="results-footer">This is an educational prototype, not a clinical skills assessment. Questions and accepted answers must be independently reviewed before formal use.</p>
+      </section>
+    </main>
+    <footer class="site-footer"><span>MADE WITH BRAINS, NOT BUDGETS.</span><span>ANAT-OOPS! <span aria-hidden="true">✳</span> RESCUE ARCADE</span></footer>
+  </div>
+  <noscript><div class="asset-warning">JavaScript is required to play ANAT-OOPS! Please enable JavaScript in your browser.</div></noscript>
+</body>
+</html>
